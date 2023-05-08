@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,6 +44,17 @@ public class CruiseShip {
             }
         }
     }
+    public int generateBill(int cabinNumber) {    	
+    	int total = 0; 
+        for (Cabin cabin : cabinList) {
+            if (cabin.getCabinNumber() == cabinNumber && !cabin.isAvailable()) {
+                int rate = cabin.getRate();
+                int days = 7; // assume a week-long cruise
+                total = (rate * days);
+              }
+        }
+            return total;
+    }
     public void SelectFood(){
     	System.out.println("There are 3 different Food Packages::");
     	System.out.println("1.Premium Food Package = Rs. 400 / day");
@@ -69,35 +78,9 @@ public class CruiseShip {
     		System.out.println("Your Total Food Bill would be::"+FoodBill);	}
     	else
     		System.out.println("Wrong Choice!!!");
-    }
-    public int generateBill(int cabinNumber) {    	
-    	int total = 0; 
-        for (Cabin cabin : cabinList) {
-            if (cabin.getCabinNumber() == cabinNumber && !cabin.isAvailable()) {
-                int rate = cabin.getRate();
-                int days = 7; // assume a week-long cruise
-                total = (rate * days);
-              }
-        }
-            return total;
-    }
-    
-    public void generateSubtotalBill()
-    {   
-    	
-        
-    }
-   /* public void disptxt(char ar[]){
-    	int x=0;
-    	while (ar[x] != '\0') 
-    	{ System.out.println( ar[x]);
-    	  for (long i=0; i<2000000; i++); 
-    	  x++ ;
-    	}  
-    	// creates a small time gap after every letter
-    }
-    */
-
+    	int TotalBill = FoodBill + generateBill();
+    	System.out.println("Your Total Bill is ::"+TotalBill);
+    }    
     public static void main(String[] args) throws IOException {
     	  Scanner scanner = new Scanner(System.in);
           CruiseShip cruiseShip = new CruiseShip("Awesome Ship", 3); // create a new cruise ship with 10 cabins
@@ -107,8 +90,8 @@ public class CruiseShip {
               System.out.println("\n=== Cabin Booking System ===");
               System.out.println("1. Book a cabin");
               System.out.println("2. Display available cabins");
-              System.out.println("3. Generate bill for a cabin");
-              System.out.println("4. Select Food Package");
+              System.out.println("3. Generate bill for cabin");
+              System.out.println("4. Select Food Package & Check Out");
               System.out.println("5. Exit");
               System.out.print("Enter your choice: ");
               int choice = scanner.nextInt();
