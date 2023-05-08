@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -87,7 +86,7 @@ public class CruiseShip {
     	int TotalBill = FoodBill + total;
     	System.out.println("Your Total Bill is ::"+TotalBill);
     }    
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
     	  Scanner scanner = new Scanner(System.in);
           CruiseShip cruiseShip = new CruiseShip("Awesome Ship", 3); // create a new cruise ship with 10 cabins
           cruiseShip.initializeCabins(); // initialize the cabins
