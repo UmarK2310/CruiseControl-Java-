@@ -3,12 +3,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CruiseShip {
+	public int total;
     private String shipName;
     private int numberOfCabins;
     private ArrayList<Cabin> cabinList;
 
     public CruiseShip(String shipName, int numberOfCabins) {
         this.shipName = shipName;
+        this.total= total;
         this.numberOfCabins = numberOfCabins;
         this.cabinList = new ArrayList<Cabin>();
     }
@@ -44,23 +46,27 @@ public class CruiseShip {
             }
         }
     }
-    public int generateBill(int cabinNumber) {    	
-    	int total = 0; 
+    public void generateBill(int cabinNumber) {    	
+    	total = 0; 
         for (Cabin cabin : cabinList) {
             if (cabin.getCabinNumber() == cabinNumber && !cabin.isAvailable()) {
                 int rate = cabin.getRate();
                 int days = 7; // assume a week-long cruise
-                total = (rate * days);
-              }
+                total = (rate * days);       
+        System.out.println("Cabin " + cabinNumber + " - " + cabin.getCategory());
+        System.out.println("Guest Name: " + cabin.getGuestName());
+        System.out.println("Rate per day: $" + rate);
+        System.out.println("Days: " + days);
+        System.out.println("Total: $" + total);
+        return;}
         }
-            return total;
     }
     public void SelectFood(){
     	System.out.println("There are 3 different Food Packages::");
     	System.out.println("1.Premium Food Package = Rs. 400 / day");
     	System.out.println("2.Silver Food Package = Rs. 300 / day");
     	System.out.println("3.Platinum Food Package = Rs. 200 / day");
-    	System.out.println("Enter Your Choice (1/2/3)::");
+    	System.out.println("Enter Your Choice (1/2/3)::"); 
     	Scanner sc=new Scanner(System.in);
     	int ch = sc.nextInt();    	
     	Food premiumfood= new Food(1,400,"Premium Food");
@@ -77,8 +83,8 @@ public class CruiseShip {
     	{	FoodBill=platinumfood.getFoodrate() * 7;
     		System.out.println("Your Total Food Bill would be::"+FoodBill);	}
     	else
-    		System.out.println("Wrong Choice!!!");
-    	int TotalBill = FoodBill + generateBill();
+    	{	System.out.println("Wrong Choice!!!");}
+    	int TotalBill = FoodBill + total;
     	System.out.println("Your Total Bill is ::"+TotalBill);
     }    
     public static void main(String[] args) throws IOException {
